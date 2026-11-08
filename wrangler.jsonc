@@ -1,0 +1,6 @@
+{
+  // Cloudflare config: deploys this folder as the "the" Worker (the.bertiga.workers.dev)
+  "name": "the",
+  "compatibility_date": "2026-11-01",
+  "assets": { "directory": "." }
+}

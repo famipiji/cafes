@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Your Cafe] — Coffee, Sparkling, Matcha &amp; Chocolate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ====== EDIT HERE: your WhatsApp number (country code, no + or spaces) ====== */
+  /* Set it in the script at the bottom: const WHATSAPP_NUMBER = "60123456789"; */
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;color:#1F1A17;background:#FBFAF7}
+  h1,h2,h3{font-family:'Bricolage Grotesque',Inter,sans-serif;margin:0}
+  p{margin:0}
+  a{color:inherit}
+  .wrap{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
+  .eyebrow{font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#3F5A2C}
+  .h2{font-size:clamp(34px,4vw,48px);line-height:1.05;font-weight:800;letter-spacing:-.03em}
+  .lead{font-size:18px;line-height:1.6;color:#5A524B}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;font-weight:600;text-decoration:none;min-height:44px}
+  .btn-green{background:#3F5A2C;color:#fff;padding:16px 28px;font-size:16px}
+  .btn-green:hover{background:#2C4120}
+  .btn-outline{border:1.5px solid #1F1A17;color:#1F1A17;padding:16px 28px;font-size:16px}
+  .ico{width:20px;height:20px;flex:none}
+
+  header{position:sticky;top:0;z-index:10;background:rgba(251,250,247,.94);border-bottom:1px solid #E8E3DA;backdrop-filter:blur(6px)}
+  nav.main{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-top:16px;padding-bottom:16px}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .logo-mark{width:40px;height:40px;border-radius:12px;background:#1F1A17;display:flex;align-items:center;justify-content:center}
+  .logo-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px;letter-spacing:-.02em}
+  .navlinks{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  .navlinks a.l{padding:12px 14px;font-weight:500;font-size:15px;text-decoration:none}
+  .navlinks .btn-green{padding:12px 20px;font-size:15px}
+
+  .hero{display:flex;flex-wrap:wrap;align-items:center;gap:48px;padding-top:72px;padding-bottom:56px}
+  .hero-text{flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:24px}
+  .hero h1{font-size:clamp(44px,6vw,76px);line-height:1;font-weight:800;letter-spacing:-.035em}
+  .hero .lead{font-size:19px;max-width:520px}
+  .hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+  .hero-tiles{flex:1 1 420px;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .tile{aspect-ratio:1/1.15;border-radius:28px;display:flex;align-items:flex-end;padding:20px;font-weight:600;font-size:15px;color:#fff;overflow:hidden;background-size:cover;background-position:center}
+
+  .menu{background:#fff;border-top:1px solid #E8E3DA;border-bottom:1px solid #E8E3DA}
+  .section{padding-top:88px;padding-bottom:88px;display:flex;flex-direction:column;gap:40px}
+  .head{display:flex;flex-direction:column;gap:12px;max-width:640px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+  .card{border:1px solid #E8E3DA;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px;background:#FBFAF7}
+  .card h3{font-size:26px;font-weight:700;letter-spacing:-.02em}
+  .card p{font-size:16px;line-height:1.6;color:#5A524B}
+  .card .note{font-size:14px;color:#6B6259}
+  .badge{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center}
+
+  .events{background:#1F1A17;color:#FBFAF7}
+  .events .eyebrow{color:#B7CF9A}
+  .events .lead{color:#CFC7BE}
+  .ecard{border:1px solid #3A322C;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px;background:#29221E}
+  .ecard h3{font-size:26px;font-weight:700;letter-spacing:-.02em}
+  .ecard p{font-size:16px;line-height:1.6;color:#CFC7BE;flex-grow:1}
+  .num{width:52px;height:52px;border-radius:16px;background:#3F5A2C;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;color:#fff}
+  .btn-light{background:#FBFAF7;color:#1F1A17;padding:14px 20px;font-size:15px}
+  .btn-light:hover{background:#fff}
+
+  .crumbs ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:15px;color:#6B6259}
+  .crumbs a{text-decoration:none;color:#6B6259}
+  .crumbs a:hover{color:#1F1A17}
+  .crumbs [aria-current]{color:#1F1A17;font-weight:600}
+  .filters{display:flex;flex-wrap:wrap;gap:10px}
+  .filters button{min-height:44px;padding:10px 20px;border-radius:999px;font:600 15px Inter,system-ui,sans-serif;cursor:pointer;background:#fff;color:#1F1A17;border:1.5px solid #D8D1C6}
+  .filters button[aria-pressed="true"]{background:#1F1A17;color:#fff;border-color:#1F1A17}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+  .gallery figure{margin:0;display:flex;flex-direction:column;gap:12px}
+  .photo{position:relative;aspect-ratio:4/5;border-radius:24px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .photo .tag{position:absolute;left:14px;bottom:12px;font-size:12px;font-weight:500;background:rgba(255,255,255,.85);padding:4px 10px;border-radius:999px}
+  figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  figcaption b{font-size:17px;font-weight:600}
+  figcaption span{font-size:14px;color:#6B6259}
+
+  .cta{border-radius:32px;background:#3F5A2C;padding:56px 40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px}
+  .cta h2{font-size:clamp(30px,3.6vw,42px);line-height:1.1;font-weight:800;letter-spacing:-.03em;color:#fff}
+  .cta p{font-size:18px;line-height:1.6;color:#E4EDD9}
+  .btn-white{background:#fff;color:#2C4120;padding:18px 30px;font-size:17px;font-weight:700}
+
+  footer{border-top:1px solid #E8E3DA}
+  footer .wrap{padding-top:40px;padding-bottom:96px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;font-size:15px;color:#5A524B}
+  footer .col{display:flex;flex-direction:column;gap:6px}
+
+  .float-wa{position:fixed;right:24px;bottom:24px;z-index:20;display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;background:#1E8A4C;color:#fff;font-weight:700;font-size:16px;text-decoration:none;box-shadow:0 8px 24px rgba(31,26,23,.22)}
+  .float-wa:hover{background:#17733F}
+  @media (max-width:520px){.float-wa{right:16px;bottom:16px;padding:12px 18px}.cta{padding:40px 24px}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header>
+  <nav class="main wrap" aria-label="Main">
+    <a href="#top" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FBFAF7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3v3M12 3v3"/></svg>
+      </span>
+      <span class="logo-name">[Your Cafe]</span>
+    </a>
+    <div class="navlinks">
+      <a class="l" href="#menu">Menu</a>
+      <a class="l" href="#events">Events</a>
+      <a class="l" href="#gallery">Our Drinks</a>
+      <a class="btn btn-green wa" data-msg="Hi! I would like to know more about your cafe and drinks." href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+<section id="top" class="hero wrap">
+  <div class="hero-text">
+    <p class="eyebrow">Drinks only · Done properly</p>
+    <h1>Coffee, sparkling, matcha &amp; chocolate.</h1>
+    <p class="lead">Four things, made well. Visit us at the bar, or bring our drinks cart to your wedding, private event or birthday party.</p>
+    <div class="hero-btns">
+      <a class="btn btn-green wa" data-msg="Hi! I would like to know more about your cafe and drinks." href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us on WhatsApp</a>
+      <a class="btn btn-outline" href="#events">Book us for an event</a>
+    </div>
+  </div>
+  <!-- Tip: to use photos, add style="background-image:url('images/coffee.jpg')" to a tile -->
+  <div class="hero-tiles">
+    <div class="tile" style="background-color:#6B4A36">Coffee</div>
+    <div class="tile" style="background-color:#6F8F4E;margin-top:40px">Matcha</div>
+    <div class="tile" style="background-color:#D9E8EC;color:#1F1A17;margin-top:-40px">Sparkling</div>
+    <div class="tile" style="background-color:#3A2620">Chocolate</div>
+  </div>
+</section>
+
+<section id="menu" class="menu">
+  <div class="wrap section">
+    <div class="head">
+      <p class="eyebrow">The menu</p>
+      <h2 class="h2">Only four categories. No distractions.</h2>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <span class="badge" style="background:#6B4A36" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"/></svg></span>
+        <h3>Coffee</h3>
+        <p>Espresso-based classics, hot or iced. Americano, latte, cappuccino, flat white.</p>
+        <p class="note">[Add your coffee list &amp; prices]</p>
+      </article>
+      <article class="card">
+        <span class="badge" style="background:#3E7C8C" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l-1.5 17a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1L6 3z"/><circle cx="10" cy="10" r="1"/><circle cx="13.5" cy="14" r="1"/><circle cx="11" cy="17" r=".8"/></svg></span>
+        <h3>Sparkling</h3>
+        <p>Bright, fizzy and refreshing. Fruity sodas and sparkling coffee coolers.</p>
+        <p class="note">[Add your sparkling list &amp; prices]</p>
+      </article>
+      <article class="card">
+        <span class="badge" style="background:#5E7D40" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20c0-8 6-15 14-16-1 8-7 14-14 16z"/><path d="M5 20l7-7"/></svg></span>
+        <h3>Matcha</h3>
+        <p>Whisked to order. Matcha latte, iced matcha and matcha with your choice of milk.</p>
+        <p class="note">[Add your matcha list &amp; prices]</p>
+      </article>
+      <article class="card">
+        <span class="badge" style="background:#3A2620" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M5 9h14M5 15h14M12 3v18"/></svg></span>
+        <h3>Chocolate</h3>
+        <p>Rich, thick chocolate. Hot chocolate, iced chocolate and chocolate blends.</p>
+        <p class="note">[Add your chocolate list &amp; prices]</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="events" class="events">
+  <div class="wrap section">
+    <div class="head">
+      <p class="eyebrow">Events &amp; vendor services</p>
+      <h2 class="h2">We bring the drinks bar to you.</h2>
+      <p class="lead">Open for bookings as a drinks vendor. Tell us your date, location and number of guests, and we’ll put together a package.</p>
+    </div>
+    <div class="cards">
+      <article class="ecard">
+        <span class="num" aria-hidden="true">01</span>
+        <h3>Weddings</h3>
+        <p>A drinks bar for your guests on the big day. Coffee, matcha, chocolate and sparkling, served fresh.</p>
+        <a class="btn btn-light wa" data-msg="Hi! I would like to book your drinks service for a wedding. Date: , Location: , Guests: " href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us</a>
+      </article>
+      <article class="ecard">
+        <span class="num" aria-hidden="true">02</span>
+        <h3>Private events</h3>
+        <p>Corporate gatherings, open houses, launches or family days. We set up and serve on site.</p>
+        <a class="btn btn-light wa" data-msg="Hi! I would like to book your drinks service for a private event. Date: , Location: , Guests: " href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us</a>
+      </article>
+      <article class="ecard">
+        <span class="num" aria-hidden="true">03</span>
+        <h3>Events</h3>
+        <p>Bazaars, festivals, community and school events. A drinks booth that keeps the line moving.</p>
+        <a class="btn btn-light wa" data-msg="Hi! I would like to book your drinks service for an event. Date: , Location: , Guests: " href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us</a>
+      </article>
+      <article class="ecard">
+        <span class="num" aria-hidden="true">04</span>
+        <h3>Birthday parties</h3>
+        <p>Make the party special with a drinks corner for kids and adults, chocolate included.</p>
+        <a class="btn btn-light wa" data-msg="Hi! I would like to book your drinks service for a birthday party. Date: , Location: , Guests: " href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="wrap section">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="#top">Home</a></li>
+      <li aria-hidden="true">›</li>
+      <li><a href="#gallery">Our Drinks</a></li>
+      <li aria-hidden="true">›</li>
+      <li aria-current="page" id="crumb-current">All drinks</li>
+    </ol>
+  </nav>
+  <div class="head">
+    <h2 class="h2">See how our drinks look.</h2>
+    <p class="lead">Pick a category to browse.</p>
+  </div>
+  <div class="filters" role="group" aria-label="Filter drinks" id="filters"></div>
+  <div class="gallery" id="gallery-grid"></div>
+</section>
+
+<section class="wrap" style="padding-bottom:88px">
+  <div class="cta">
+    <div class="head" style="gap:10px;max-width:620px">
+      <h2>Planning a wedding, party or event?</h2>
+      <p>Message us on WhatsApp with your date and guest count. We reply fast.</p>
+    </div>
+    <a class="btn btn-white wa" data-msg="Hi! I would like to book your drinks service for an event. Date: , Location: , Guests: " href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="col">
+      <span class="logo-name" style="font-size:20px;color:#1F1A17">[Your Cafe]</span>
+      <span>Coffee · Sparkling · Matcha · Chocolate</span>
+    </div>
+    <div class="col">
+      <span>[Your address]</span>
+      <span>[Opening hours]</span>
+      <span>WhatsApp: +<span id="wa-num"></span></span>
+    </div>
+  </div>
+</footer>
+
+<a class="float-wa wa" data-msg="Hi! I would like to know more about your cafe and drinks." href="#" target="_blank" rel="noopener" aria-label="Contact us on WhatsApp">
+  <svg class="ico" style="width:22px;height:22px" aria-hidden="true"><use href="#chat"/></svg>Contact us
+</a>
+
+<script>
+  // ====== EDIT HERE ======
+  const WHATSAPP_NUMBER = "60123456789"; // country code + number, digits only
+
+  // Gallery drinks. To use your own photo, set photo: "images/iced-latte.jpg"
+  const DRINKS = [
+    { name: "Iced Latte",        cat: "coffee",    liquid: "#B8875F", top: "#F2E6D6", photo: "" },
+    { name: "Americano",         cat: "coffee",    liquid: "#3B2418", top: "#6B4A36", photo: "" },
+    { name: "Cappuccino",        cat: "coffee",    liquid: "#9A6B48", top: "#F6EEE3", photo: "" },
+    { name: "Lemon Sparkling",   cat: "sparkling", liquid: "#F2DE7A", top: "#FFF6C8", photo: "" },
+    { name: "Berry Sparkling",   cat: "sparkling", liquid: "#C2456A", top: "#F2A3B7", photo: "" },
+    { name: "Iced Matcha Latte", cat: "matcha",    liquid: "#8DAF5E", top: "#F1F4E6", photo: "" },
+    { name: "Hot Matcha",        cat: "matcha",    liquid: "#6F8F3E", top: "#A9C47D", photo: "" },
+    { name: "Hot Chocolate",     cat: "choc",      liquid: "#4A2C22", top: "#8A5C47", photo: "" },
+    { name: "Iced Chocolate",    cat: "choc",      liquid: "#5C3829", top: "#E8D6C8", photo: "" }
+  ];
+  // =======================
+
+  const num = WHATSAPP_NUMBER.replace(/\D/g, "");
+  document.getElementById("wa-num").textContent = num;
+  document.querySelectorAll("a.wa").forEach(a => {
+    a.href = "https://wa.me/" + num + "?text=" + encodeURIComponent(a.dataset.msg || "");
+  });
+
+  const CATS = [
+    { id: "all", label: "All drinks" },
+    { id: "coffee", label: "Coffee" },
+    { id: "sparkling", label: "Sparkling" },
+    { id: "matcha", label: "Matcha" },
+    { id: "choc", label: "Chocolate" }
+  ];
+  const CAT_LABEL = { coffee: "Coffee", sparkling: "Sparkling", matcha: "Matcha", choc: "Chocolate" };
+  const TILE = { coffee: "#EADBCB", sparkling: "#D9E8EC", matcha: "#DCE7CC", choc: "#E3D2CB" };
+
+  const filtersEl = document.getElementById("filters");
+  const grid = document.getElementById("gallery-grid");
+  const crumb = document.getElementById("crumb-current");
+
+  function cup(d) {
+    return `<svg role="img" aria-label="${d.name}" width="120" height="150" viewBox="0 0 120 150">
+      <path d="M22 20h76l-9 118a6 6 0 0 1-6 6H37a6 6 0 0 1-6-6L22 20z" fill="rgba(255,255,255,.35)" stroke="rgba(255,255,255,.8)" stroke-width="2"/>
+      <path d="M27 52h66l-6.5 85a5 5 0 0 1-5 5H38.5a5 5 0 0 1-5-5L27 52z" fill="${d.liquid}"/>
+      <path d="M27 52h66l-1.2 14H28.2z" fill="${d.top}"/></svg>
+      <span class="tag">Replace with your photo</span>`;
+  }
+
+  function render(cur) {
+    filtersEl.innerHTML = "";
+    CATS.forEach(c => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = c.label;
+      b.setAttribute("aria-pressed", c.id === cur ? "true" : "false");
+      b.onclick = () => render(c.id);
+      filtersEl.appendChild(b);
+    });
+    crumb.textContent = CATS.find(c => c.id === cur).label;
+    grid.innerHTML = DRINKS.filter(d => cur === "all" || d.cat === cur).map(d => `
+      <figure>
+        <div class="photo" style="background:${TILE[d.cat]}">
+          ${d.photo ? `<img src="${d.photo}" alt="${d.name}">` : cup(d)}
+        </div>
+        <figcaption><b>${d.name}</b><span>${CAT_LABEL[d.cat]}</span></figcaption>
+      </figure>`).join("");
+  }
+  render("all");
+</script>
+</body>
+</html>

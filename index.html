@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bertiga — Coffee · Sparkling · Matcha · Chocolate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E0F0C;
+  --paper:#F4F3EE;
+  --matcha:#7FA350;
+  --matcha-deep:#2F4A22;
+  --muted:#6E6E66;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img,video{display:block}
+.display{font-family:Oswald,'Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:-.01em;line-height:.92;font-weight:600}
+.wrap{max-width:1400px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+
+/* ---------- HEADER ---------- */
+.site-header{position:fixed;inset:0 0 auto 0;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:16px clamp(16px,3vw,28px);color:#fff;transition:background .5s var(--ease),color .5s var(--ease),padding .5s var(--ease)}
+.site-header.solid{background:rgba(244,243,238,.92);color:var(--ink);backdrop-filter:blur(10px);padding-top:10px;padding-bottom:10px}
+.brand{text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
+.brand .name{font-family:Oswald,sans-serif;font-weight:700;font-size:26px;letter-spacing:.02em;text-transform:lowercase}
+.brand .meta{font-size:11px;letter-spacing:.08em;opacity:.85}
+.icon-btn{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;color:inherit;cursor:pointer;border-radius:999px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--matcha);outline-offset:3px}
+.burger{position:relative;width:22px;height:14px}
+.burger i{position:absolute;left:0;width:100%;height:1.6px;background:currentColor;transition:transform .5s var(--ease),top .5s var(--ease),opacity .3s}
+.burger i:nth-child(1){top:0}.burger i:nth-child(2){top:6px}.burger i:nth-child(3){top:12px}
+.menu-open .burger i:nth-child(1){top:6px;transform:rotate(45deg)}
+.menu-open .burger i:nth-child(2){opacity:0}
+.menu-open .burger i:nth-child(3){top:6px;transform:rotate(-45deg)}
+.header-right{justify-self:end;display:flex;align-items:center;gap:6px}
+.wa-pill{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 16px;border-radius:999px;border:1px solid currentColor;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;transition:background .3s,color .3s}
+.wa-pill:hover{background:#fff;color:var(--ink)}
+.site-header.solid .wa-pill:hover{background:var(--ink);color:#fff}
+@media (max-width:640px){.wa-pill span{display:none}.wa-pill{padding:10px 12px}.brand .name{font-size:22px}}
+
+/* ---------- SIDEBAR MENU ---------- */
+.backdrop{position:fixed;inset:0;z-index:65;background:rgba(14,15,12,.35);backdrop-filter:blur(10px) saturate(.9);-webkit-backdrop-filter:blur(10px) saturate(.9);opacity:0;visibility:hidden;transition:opacity .6s var(--ease),visibility 0s .6s;cursor:pointer}
+.menu-open .backdrop{opacity:1;visibility:visible;transition:opacity .6s var(--ease),visibility 0s}
+.overlay{position:fixed;top:0;left:0;bottom:0;z-index:70;width:min(460px,88vw);background:var(--ink);color:var(--paper);transform:translateX(-102%);visibility:hidden;transition:transform .8s var(--ease),visibility 0s .8s;display:flex;flex-direction:column;padding:20px clamp(24px,3vw,40px) 32px;box-shadow:20px 0 60px rgba(0,0,0,.25);overflow-y:auto}
+.menu-open .overlay{transform:translateX(0);visibility:visible;transition:transform .8s var(--ease),visibility 0s}
+.overlay-top{display:flex;align-items:center;justify-content:space-between;margin:0 -10px 0 -10px}
+.overlay-top .name{font-family:Oswald,sans-serif;font-weight:700;font-size:22px;text-transform:lowercase;padding:0 10px}
+.close-btn{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;color:inherit;cursor:pointer;border-radius:999px;transition:background .3s,transform .5s var(--ease)}
+.close-btn:hover{background:#25251F;transform:rotate(90deg)}
+.overlay nav{flex:1;display:flex;align-items:center;padding:40px 0}
+.overlay nav ul{list-style:none;margin:0;padding:0;width:100%}
+.overlay nav li{overflow:hidden;border-bottom:1px solid #23231E}
+.overlay nav a{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:10px 0;font-family:Oswald,sans-serif;text-transform:uppercase;font-weight:600;font-size:clamp(36px,5vw,56px);line-height:1.05;transform:translateY(110%);transition:transform .8s var(--ease),color .3s,padding .4s var(--ease)}
+.overlay nav a small{font-family:Inter,sans-serif;font-size:12px;letter-spacing:.2em;color:#77776E;font-weight:500}
+.overlay nav a:hover{color:var(--matcha);padding-left:10px}
+.menu-open .overlay nav a{transform:translateY(0)}
+.overlay nav li:nth-child(1) a{transition-delay:.15s}
+.overlay nav li:nth-child(2) a{transition-delay:.2s}
+.overlay nav li:nth-child(3) a{transition-delay:.25s}
+.overlay nav li:nth-child(4) a{transition-delay:.3s}
+.overlay nav li:nth-child(5) a{transition-delay:.35s}
+.overlay-foot{display:flex;flex-direction:column;gap:8px;font-size:14px;color:#BDBDB4;opacity:0;transition:opacity .6s .45s}
+.overlay-foot a:hover{color:#fff}
+.menu-open .overlay-foot{opacity:1}
+.overlay .btn-wa{margin-top:18px;background:#1E8A4C;color:#fff;align-self:flex-start}
+.overlay .btn-wa:hover{background:#17733F}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;height:100svh;min-height:560px;overflow:hidden;color:#fff;background:var(--matcha-deep)}
+.hero-media{position:absolute;inset:0;background:
+  radial-gradient(60% 50% at 30% 40%,#9CC06A 0%,transparent 60%),
+  radial-gradient(50% 60% at 75% 65%,#E9F0DA 0%,transparent 55%),
+  radial-gradient(70% 70% at 50% 100%,#1F3316 0%,transparent 70%),
+  var(--matcha-deep);
+  background-size:140% 140%;animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{0%{background-position:0% 0%}100%{background-position:100% 100%}}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.12);animation:settle 2.4s var(--ease) forwards}
+@keyframes settle{to{transform:scale(1)}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 25%,rgba(0,0,0,0) 50%,rgba(0,0,0,.6) 100%)}
+.hero-copy{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:0 clamp(16px,4vw,48px) clamp(40px,6vw,72px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px}
+.hero h1{margin:0;font-size:clamp(56px,12vw,200px)}
+.line{display:block;overflow:hidden}
+.line > span{display:block;transform:translateY(105%);animation:rise 1.2s var(--ease) forwards}
+.line:nth-child(2) > span{animation-delay:.12s}
+.line:nth-child(3) > span{animation-delay:.24s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero-side{max-width:340px;display:flex;flex-direction:column;gap:18px;opacity:0;animation:fade 1s .8s forwards}
+.hero-side p{margin:0;font-size:16px;line-height:1.55}
+@keyframes fade{to{opacity:1}}
+.scroll-cue{position:absolute;z-index:2;left:50%;bottom:14px;transform:translateX(-50%);width:1px;height:40px;background:rgba(255,255,255,.35);overflow:hidden}
+.scroll-cue::after{content:"";position:absolute;left:0;top:-50%;width:100%;height:50%;background:#fff;animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{to{top:100%}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:14px 26px;border-radius:999px;font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;transition:transform .4s var(--ease),background .3s,color .3s}
+.btn:hover{transform:translateY(-2px)}
+.btn-light{background:#fff;color:var(--ink)}
+.btn-line{border:1px solid currentColor}
+.ico{width:18px;height:18px;flex:none}
+
+/* ---------- MARQUEE ---------- */
+.marquee{background:var(--ink);color:var(--paper);overflow:hidden;white-space:nowrap;padding:18px 0}
+.marquee-track{display:inline-flex;gap:48px;animation:scrollx 28s linear infinite;padding-left:48px}
+.marquee span{font-family:Oswald,sans-serif;text-transform:uppercase;font-size:clamp(28px,4vw,52px);font-weight:500;display:inline-flex;align-items:center;gap:48px}
+.marquee span::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--matcha)}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+
+/* ---------- SECTIONS ---------- */
+section{position:relative}
+.sec{padding:clamp(80px,12vw,160px) 0}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(40px,6vw,72px)}
+.sec-head h2{margin:0;font-size:clamp(48px,8vw,128px)}
+.sec-head p{margin:0;max-width:420px;font-size:17px;line-height:1.6;color:var(--muted)}
+
+/* Menu panels */
+.panels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:1000px){.panels{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.panels{grid-template-columns:1fr}}
+.panel{position:relative;aspect-ratio:3/4.4;border-radius:6px;overflow:hidden;color:#fff;isolation:isolate}
+.panel .bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.02);transition:transform 1.2s var(--ease)}
+.panel:hover .bg{transform:scale(1.1)}
+.panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.6))}
+.panel .num{position:absolute;top:18px;left:20px;z-index:1;font-size:12px;letter-spacing:.2em}
+.panel .txt{position:absolute;left:20px;right:20px;bottom:20px;z-index:1}
+.panel h3{margin:0 0 10px;font-size:clamp(40px,4vw,64px)}
+.panel p{margin:0;font-size:15px;line-height:1.5;max-height:0;opacity:0;overflow:hidden;transition:max-height .7s var(--ease),opacity .5s}
+.panel:hover p,.panel:focus-within p,.panel:focus p{max-height:120px;opacity:1}
+@media (hover:none){.panel p{max-height:none;opacity:1}}
+
+/* Events */
+.events{background:var(--ink);color:var(--paper)}
+.events .sec-head p{color:#A9A9A0}
+.ev-list{border-top:1px solid #2A2A26}
+.ev{display:grid;grid-template-columns:80px 1fr minmax(0,420px) auto;align-items:center;gap:24px;padding:32px 16px;margin:0 -16px;border-bottom:1px solid #2A2A26;position:relative;overflow:hidden}
+.ev::before{content:"";position:absolute;inset:0;background:var(--matcha-deep);transform:translateY(101%);transition:transform .7s var(--ease);z-index:0}
+.ev:hover::before{transform:translateY(0)}
+.ev > *{position:relative;z-index:1}
+.ev .n{font-size:13px;letter-spacing:.2em;color:#8D8D84}
+.ev:hover .n{color:#C9D9B5}
+.ev h3{margin:0;font-size:clamp(36px,5vw,72px)}
+.ev p{margin:0;font-size:15px;line-height:1.6;color:#C9C9BF}
+.ev .btn{white-space:nowrap}
+@media (max-width:900px){.ev{grid-template-columns:1fr;gap:12px;padding:28px 16px}}
+
+/* Gallery */
+.crumbs ol{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-wrap:wrap;gap:10px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.crumbs a:hover{color:var(--ink)}
+.crumbs [aria-current]{color:var(--ink);font-weight:600}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+.filters button{min-height:44px;padding:10px 20px;border-radius:999px;border:1px solid #CFCEC5;background:transparent;color:var(--ink);font:600 13px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.filters button:hover{border-color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.grid figure{margin:0;opacity:0;transform:translateY(24px);animation:in .8s var(--ease) forwards}
+@keyframes in{to{opacity:1;transform:none}}
+.shot{position:relative;aspect-ratio:4/5;border-radius:6px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.shot svg{transition:transform 1.2s var(--ease)}
+.grid figure:hover .shot img,.grid figure:hover .shot svg{transform:scale(1.06)}
+.shot .tag{position:absolute;left:12px;bottom:12px;font-size:11px;letter-spacing:.06em;background:rgba(255,255,255,.85);padding:4px 10px;border-radius:999px}
+.grid figcaption{display:flex;justify-content:space-between;padding:12px 2px 0}
+.grid figcaption b{font-family:Oswald,sans-serif;text-transform:uppercase;font-weight:500;font-size:20px}
+.grid figcaption span{color:var(--muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase;align-self:center}
+
+/* CTA */
+.cta{background:var(--matcha-deep);color:#fff;text-align:center;overflow:hidden}
+.cta h2{margin:0 auto 28px;font-size:clamp(56px,11vw,180px);max-width:1200px}
+.cta p{margin:0 auto 36px;max-width:520px;font-size:17px;line-height:1.6;color:#DCE6CF}
+
+/* Footer */
+footer{background:var(--ink);color:#A9A9A0;font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:28px;padding-top:48px;padding-bottom:110px}
+footer .big{font-family:Oswald,sans-serif;font-size:32px;color:var(--paper);text-transform:lowercase;font-weight:700}
+footer .col{display:flex;flex-direction:column;gap:8px}
+footer a:hover{color:#fff}
+
+/* Floating WhatsApp */
+.float-wa{position:fixed;right:20px;bottom:20px;z-index:60;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:14px 22px;border-radius:999px;background:#1E8A4C;color:#fff;font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 10px 30px rgba(0,0,0,.25);transform:translateY(120px);transition:transform .7s var(--ease),background .3s}
+.float-wa.show{transform:translateY(0)}
+.float-wa:hover{background:#17733F}
+.menu-open .float-wa{transform:translateY(120px)}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}.reveal-d3{transition-delay:.24s}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- HEADER -->
+<header class="site-header" id="header">
+  <div>
+    <button class="icon-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="overlay">
+      <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+  <a href="#top" class="brand" aria-label="Home">
+    <span class="name">bertiga</span>
+    <span class="meta"><span id="city"></span> | <span id="today"></span></span>
+  </a>
+  <div class="header-right">
+    <a class="wa-pill wa" data-msg="Hi! I would like to know more about your cafe and drinks." href="#" target="_blank" rel="noopener" aria-label="Contact us on WhatsApp">
+      <svg class="ico" aria-hidden="true"><use href="#chat"/></svg><span>Contact us</span>
+    </a>
+  </div>
+</header>
+
+<!-- SIDEBAR MENU -->
+<div class="backdrop" id="backdrop" aria-hidden="true"></div>
+<aside class="overlay" id="overlay" aria-hidden="true" aria-label="Menu">
+  <div class="overlay-top">
+    <span class="name">bertiga</span>
+    <button class="close-btn" id="closeBtn" aria-label="Close menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <nav aria-label="Main">
+    <ul>
+      <li><a href="#top">Home <small>01</small></a></li>
+      <li><a href="#menu">Menu <small>02</small></a></li>
+      <li><a href="#events">Book us <small>03</small></a></li>
+      <li><a href="#gallery">Our drinks <small>04</small></a></li>
+      <li><a class="wa" data-msg="Hi! I would like to know more about your cafe and drinks." href="#" target="_blank" rel="noopener">Contact <small>05</small></a></li>
+    </ul>
+  </nav>
+  <div class="overlay-foot">
+    <span>Bandar Baru Bangi, Selangor</span>
+    <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+    <a class="btn btn-wa wa" data-msg="Hi! I would like to know more about your cafe and drinks." href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us</a>
+  </div>
+</aside>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-media" aria-hidden="true"></div>
+  <!-- Put your clip at videos/hero.mp4 (MP4, muted loop, ~10–20s, under 10 MB).
+       If it's missing, the animated matcha gradient shows instead. -->
+  <video id="heroVideo" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="videos/Video%20for%20background.mp4" type="video/mp4">
+  </video>
+  <div class="hero-copy">
+    <h1 class="display">
+      <span class="line"><span>Coffee.</span></span>
+      <span class="line"><span>Matcha.</span></span>
+      <span class="line"><span>Sparkling. Choc.</span></span>
+    </h1>
+    <div class="hero-side">
+      <p>Four drinks, done properly. Find us at the bar, or book our drinks cart for weddings, private events and birthday parties.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <a class="btn btn-light wa" data-msg="Hi! I would like to know more about your cafe and drinks." href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us</a>
+        <a class="btn btn-line" href="#events">Book us</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Coffee</span><span>Sparkling</span><span>Matcha</span><span>Chocolate</span><span>Weddings</span><span>Private events</span><span>Birthdays</span>
+    <span>Coffee</span><span>Sparkling</span><span>Matcha</span><span>Chocolate</span><span>Weddings</span><span>Private events</span><span>Birthdays</span>
+  </div>
+</div>
+
+<!-- MENU -->
+<section id="menu" class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="display reveal">The menu</h2>
+      <p class="reveal reveal-d1">Only four categories. Nothing to distract from the cup.</p>
+    </div>
+    <div class="panels">
+      <!-- Panel photos come from the images folder -->
+      <article class="panel reveal" tabindex="0">
+        <div class="bg" style="background-color:#5A3A28;background-image:url('images/Iced%20Latte.png')"></div>
+        <span class="num">01</span>
+        <div class="txt"><h3 class="display">Coffee</h3><p>Espresso classics, hot or iced. Americano, latte, cappuccino, flat white.</p></div>
+      </article>
+      <article class="panel reveal reveal-d1" tabindex="0">
+        <div class="bg" style="background-color:#2F6574;background-image:url('images/Strawberry%20soda.png')"></div>
+        <span class="num">02</span>
+        <div class="txt"><h3 class="display">Sparkling</h3><p>Bright and fizzy. Fruit sodas and sparkling coffee coolers.</p></div>
+      </article>
+      <article class="panel reveal reveal-d2" tabindex="0">
+        <div class="bg" style="background-color:#4A6A30;background-image:url('images/Matcha%20Latte.png')"></div>
+        <span class="num">03</span>
+        <div class="txt"><h3 class="display">Matcha</h3><p>Whisked to order. Matcha latte, iced matcha, your choice of milk.</p></div>
+      </article>
+      <article class="panel reveal reveal-d3" tabindex="0">
+        <div class="bg" style="background-color:#2E1C16;background-image:url('images/Iced%20Chocolate.png')"></div>
+        <span class="num">04</span>
+        <div class="txt"><h3 class="display">Chocolate</h3><p>Rich and thick. Hot chocolate, iced chocolate and chocolate blends.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events" class="sec events">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="display reveal">Book us</h2>
+      <p class="reveal reveal-d1">Open as a drinks vendor. Send us your date, location and guest count on WhatsApp and we’ll put together a package.</p>
+    </div>
+    <div class="ev-list">
+      <div class="ev reveal">
+        <span class="n">01</span><h3 class="display">Weddings</h3>
+        <p>A drinks bar for your guests on the big day. Coffee, matcha, chocolate and sparkling, served fresh.</p>
+        <a class="btn btn-light wa" data-msg="Hi! I would like to book your drinks service for a wedding. Date: , Location: , Guests: " href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us</a>
+      </div>
+      <div class="ev reveal">
+        <span class="n">02</span><h3 class="display">Private events</h3>
+        <p>Corporate gatherings, open houses, launches and family days. We set up and serve on site.</p>
+        <a class="btn btn-light wa" data-msg="Hi! I would like to book your drinks service for a private event. Date: , Location: , Guests: " href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us</a>
+      </div>
+      <div class="ev reveal">
+        <span class="n">03</span><h3 class="display">Events</h3>
+        <p>Bazaars, festivals, community and school events. A drinks booth that keeps the line moving.</p>
+        <a class="btn btn-light wa" data-msg="Hi! I would like to book your drinks service for an event. Date: , Location: , Guests: " href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us</a>
+      </div>
+      <div class="ev reveal">
+        <span class="n">04</span><h3 class="display">Birthday parties</h3>
+        <p>A drinks corner for kids and adults, chocolate included.</p>
+        <a class="btn btn-light wa" data-msg="Hi! I would like to book your drinks service for a birthday party. Date: , Location: , Guests: " href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="sec">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="#top">Home</a></li>
+        <li aria-hidden="true">/</li>
+        <li><a href="#gallery">Our drinks</a></li>
+        <li aria-hidden="true">/</li>
+        <li aria-current="page" id="crumbCurrent">All</li>
+      </ol>
+    </nav>
+    <div class="sec-head" style="margin-bottom:28px">
+      <h2 class="display reveal">Our drinks</h2>
+      <p class="reveal reveal-d1">How it looks in the cup. Pick a category.</p>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Filter drinks"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec cta">
+  <div class="wrap">
+    <h2 class="display reveal">Let’s pour for your guests.</h2>
+    <p class="reveal reveal-d1">Weddings, private events, birthdays. Message us with your date and guest count.</p>
+    <a class="btn btn-light wa reveal reveal-d2" data-msg="Hi! I would like to book your drinks service. Date: , Location: , Guests: " href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us on WhatsApp</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="col">
+      <span class="big">bertiga</span>
+      <span>Coffee · Sparkling · Matcha · Chocolate</span>
+    </div>
+    <div class="col">
+      <span>Bandar Baru Bangi, Selangor</span>
+        <span>WhatsApp: +<span id="waNum"></span></span>
+    </div>
+    <div class="col">
+      <a href="#menu">Menu</a><a href="#events">Book us</a><a href="#gallery">Our drinks</a>
+      <span>© <span id="year"></span> Bertiga</span>
+    </div>
+  </div>
+</footer>
+
+<a class="float-wa wa" id="floatWa" data-msg="Hi! I would like to know more about your cafe and drinks." href="#" target="_blank" rel="noopener" aria-label="Contact us on WhatsApp">
+  <svg class="ico" style="width:20px;height:20px" aria-hidden="true"><use href="#chat"/></svg>Contact us
+</a>
+
+<script>
+/* ================= EDIT HERE ================= */
+const WHATSAPP_NUMBER = "60123456789";   // country code + number, digits only
+const CITY = "Bandar Baru Bangi, Selangor";              // shown under the logo
+
+// Gallery. Add a photo with photo: "images/iced-latte.jpg"
+// cat must be: coffee | sparkling | matcha | choc
+const DRINKS = [
+  { name: "Iced Latte",       cat: "coffee",    photo: "images/Iced Latte.png" },
+  { name: "Strawberry Soda",  cat: "sparkling", photo: "images/Strawberry soda.png" },
+  { name: "Matcha Latte",     cat: "matcha",    photo: "images/Matcha Latte.png" },
+  { name: "Iced Chocolate",   cat: "choc",      photo: "images/Iced Chocolate.png" }
+  // Add more like this:
+  // { name: "Americano", cat: "coffee", photo: "images/Americano.png" },
+];
+/* ============================================= */
+
+const num = WHATSAPP_NUMBER.replace(/\D/g, "");
+document.querySelectorAll("a.wa").forEach(a => {
+  a.href = "https://wa.me/" + num + "?text=" + encodeURIComponent(a.dataset.msg || "");
+});
+document.getElementById("waNum").textContent = num;
+document.getElementById("city").textContent = CITY;
+document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("today").textContent =
+  new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+
+/* Hero video: remove it if the file is missing so the gradient shows */
+const vid = document.getElementById("heroVideo");
+vid.querySelector("source").addEventListener("error", () => vid.remove());
+
+/* Fullscreen menu */
+const body = document.body, btn = document.getElementById("menuBtn"), ov = document.getElementById("overlay");
+function setMenu(open){
+  body.classList.toggle("menu-open", open);
+  btn.setAttribute("aria-expanded", open);
+  btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  ov.setAttribute("aria-hidden", !open);
+  body.style.overflow = open ? "hidden" : "";
+  if (open) setTimeout(() => document.getElementById("closeBtn").focus(), 300); else btn.focus({ preventScroll: true });
+}
+btn.addEventListener("click", () => setMenu(!body.classList.contains("menu-open")));
+document.getElementById("closeBtn").addEventListener("click", () => setMenu(false));
+document.getElementById("backdrop").addEventListener("click", () => setMenu(false));
+ov.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+
+/* Header turns solid after the hero; floating button slides in */
+const header = document.getElementById("header"), floatWa = document.getElementById("floatWa");
+function onScroll(){
+  header.classList.toggle("solid", window.scrollY > window.innerHeight * 0.85);
+  floatWa.classList.toggle("show", window.scrollY > 300);
+}
+addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+/* Reveal on scroll */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+/* Gallery + breadcrumbs */
+const CATS = [
+  { id: "all", label: "All" }, { id: "coffee", label: "Coffee" }, { id: "sparkling", label: "Sparkling" },
+  { id: "matcha", label: "Matcha" }, { id: "choc", label: "Chocolate" }
+];
+const LABEL = { coffee: "Coffee", sparkling: "Sparkling", matcha: "Matcha", choc: "Chocolate" };
+const TILE = { coffee: "#E6D6C4", sparkling: "#D5E6EA", matcha: "#D9E5C6", choc: "#E0CCC3" };
+const filtersEl = document.getElementById("filters"), grid = document.getElementById("grid"), crumb = document.getElementById("crumbCurrent");
+
+function cup(d){
+  return `<svg role="img" aria-label="${d.name}" width="130" height="162" viewBox="0 0 120 150">
+    <path d="M22 20h76l-9 118a6 6 0 0 1-6 6H37a6 6 0 0 1-6-6L22 20z" fill="rgba(255,255,255,.4)" stroke="rgba(255,255,255,.9)" stroke-width="2"/>
+    <path d="M27 52h66l-6.5 85a5 5 0 0 1-5 5H38.5a5 5 0 0 1-5-5L27 52z" fill="${d.liquid}"/>
+    <path d="M27 52h66l-1.2 14H28.2z" fill="${d.top}"/></svg>
+    <span class="tag">Replace with your photo</span>`;
+}
+function render(cur){
+  filtersEl.innerHTML = "";
+  CATS.forEach(c => {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = c.label;
+    b.setAttribute("aria-pressed", c.id === cur);
+    b.onclick = () => render(c.id);
+    filtersEl.appendChild(b);
+  });
+  crumb.textContent = CATS.find(c => c.id === cur).label;
+  grid.innerHTML = DRINKS.filter(d => cur === "all" || d.cat === cur).map((d, i) => `
+    <figure style="animation-delay:${i * 60}ms">
+      <div class="shot" style="background:${TILE[d.cat]}">
+        ${d.photo ? `<img src="${encodeURI(d.photo)}" alt="${d.name}" loading="lazy">` : cup(d)}
+      </div>
+      <figcaption><b>${d.name}</b><span>${LABEL[d.cat]}</span></figcaption>
+    </figure>`).join("");
+}
+render("all");
+</script>
+</body>
+</html>
