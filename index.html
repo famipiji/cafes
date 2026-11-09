@@ -240,6 +240,7 @@ footer a:hover{color:#fff}
   </nav>
   <div class="overlay-foot">
     <span>Bandar Baru Bangi, Selangor</span>
+    <span>Fri &amp; Sat: 9pm – 2am<br>Sun: 9pm – 12am</span>
     <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
     <a class="btn btn-wa wa" data-msg="Hi! I would like to know more about your cafe and drinks." href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#chat"/></svg>Contact us</a>
   </div>
@@ -383,7 +384,9 @@ footer a:hover{color:#fff}
     </div>
     <div class="col">
       <span>Bandar Baru Bangi, Selangor</span>
-        <span>WhatsApp: +<span id="waNum"></span></span>
+      <span>Fri &amp; Sat: 9pm – 2am</span>
+      <span>Sun: 9pm – 12am</span>
+      <span>WhatsApp: <a href="#" class="wa" data-msg="Hi! I would like to know more about your cafe and drinks." target="_blank" rel="noopener">+60 11-6215 4929</a></span>
     </div>
     <div class="col">
       <a href="#menu">Menu</a><a href="#events">Book us</a><a href="#gallery">Our drinks</a>
@@ -398,7 +401,7 @@ footer a:hover{color:#fff}
 
 <script>
 /* ================= EDIT HERE ================= */
-const WHATSAPP_NUMBER = "60123456789";   // country code + number, digits only
+const WHATSAPP_NUMBER = "601162154929";   // country code + number, digits only
 const CITY = "Bandar Baru Bangi, Selangor";              // shown under the logo
 
 // Gallery. Add a photo with photo: "images/iced-latte.jpg"
@@ -417,7 +420,6 @@ const num = WHATSAPP_NUMBER.replace(/\D/g, "");
 document.querySelectorAll("a.wa").forEach(a => {
   a.href = "https://wa.me/" + num + "?text=" + encodeURIComponent(a.dataset.msg || "");
 });
-document.getElementById("waNum").textContent = num;
 document.getElementById("city").textContent = CITY;
 document.getElementById("year").textContent = new Date().getFullYear();
 document.getElementById("today").textContent =
