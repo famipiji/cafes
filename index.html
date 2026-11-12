@@ -147,26 +147,6 @@ section{position:relative}
 .ev .btn{white-space:nowrap}
 @media (max-width:900px){.ev{grid-template-columns:1fr;gap:12px;padding:28px 16px}}
 
-/* Gallery */
-.crumbs ol{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-wrap:wrap;gap:10px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.crumbs a:hover{color:var(--ink)}
-.crumbs [aria-current]{color:var(--ink);font-weight:600}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
-.filters button{min-height:44px;padding:10px 20px;border-radius:999px;border:1px solid #CFCEC5;background:transparent;color:var(--ink);font:600 13px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
-.filters button:hover{border-color:var(--ink)}
-.filters button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.grid figure{margin:0;opacity:0;transform:translateY(24px);animation:in .8s var(--ease) forwards}
-@keyframes in{to{opacity:1;transform:none}}
-.shot{position:relative;aspect-ratio:4/5;border-radius:6px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
-.shot svg{transition:transform 1.2s var(--ease)}
-.grid figure:hover .shot img,.grid figure:hover .shot svg{transform:scale(1.06)}
-.shot .tag{position:absolute;left:12px;bottom:12px;font-size:11px;letter-spacing:.06em;background:rgba(255,255,255,.85);padding:4px 10px;border-radius:999px}
-.grid figcaption{display:flex;justify-content:space-between;padding:12px 2px 0}
-.grid figcaption b{font-family:Oswald,sans-serif;text-transform:uppercase;font-weight:500;font-size:20px}
-.grid figcaption span{color:var(--muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase;align-self:center}
-
 /* CTA */
 .cta{background:var(--matcha-deep);color:#fff;text-align:center;overflow:hidden}
 .cta h2{margin:0 auto 28px;font-size:clamp(56px,11vw,180px);max-width:1200px}
@@ -234,8 +214,7 @@ footer a:hover{color:#fff}
       <li><a href="#top">Home <small>01</small></a></li>
       <li><a href="#menu">Menu <small>02</small></a></li>
       <li><a href="#events">Book us <small>03</small></a></li>
-      <li><a href="#gallery">Our drinks <small>04</small></a></li>
-      <li><a class="wa" data-msg="Hi! I would like to know more about your cafe and drinks." href="#" target="_blank" rel="noopener">Contact <small>05</small></a></li>
+      <li><a class="wa" data-msg="Hi! I would like to know more about your cafe and drinks." href="#" target="_blank" rel="noopener">Contact <small>04</small></a></li>
     </ul>
   </nav>
   <div class="overlay-foot">
@@ -300,7 +279,7 @@ footer a:hover{color:#fff}
         <div class="txt"><h3 class="display">Sparkling</h3><p>Bright and fizzy. Fruit sodas and sparkling coffee coolers.</p></div>
       </article>
       <article class="panel reveal reveal-d2" tabindex="0">
-        <div class="bg" style="background-color:#4A6A30;background-image:url('images/Matcha%20Latte.png');inset:-45% -22.5% 0 -22.5%"></div>
+        <div class="bg" style="background-color:#4A6A30;background-image:url('images/Matcha%20Latte.png')"></div>
         <span class="num">03</span>
         <div class="txt"><h3 class="display">Matcha</h3><p>Whisked to order. Matcha latte, iced matcha, your choice of milk.</p></div>
       </article>
@@ -345,27 +324,6 @@ footer a:hover{color:#fff}
   </div>
 </section>
 
-<!-- GALLERY -->
-<section id="gallery" class="sec">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <ol>
-        <li><a href="#top">Home</a></li>
-        <li aria-hidden="true">/</li>
-        <li><a href="#gallery">Our drinks</a></li>
-        <li aria-hidden="true">/</li>
-        <li aria-current="page" id="crumbCurrent">All</li>
-      </ol>
-    </nav>
-    <div class="sec-head" style="margin-bottom:28px">
-      <h2 class="display reveal">Our drinks</h2>
-      <p class="reveal reveal-d1">How it looks in the cup. Pick a category.</p>
-    </div>
-    <div class="filters" id="filters" role="group" aria-label="Filter drinks"></div>
-    <div class="grid" id="grid"></div>
-  </div>
-</section>
-
 <!-- CTA -->
 <section class="sec cta">
   <div class="wrap">
@@ -389,7 +347,7 @@ footer a:hover{color:#fff}
       <span>WhatsApp: <a href="#" class="wa" data-msg="Hi! I would like to know more about your cafe and drinks." target="_blank" rel="noopener">+60 11-6215 4929</a></span>
     </div>
     <div class="col">
-      <a href="#menu">Menu</a><a href="#events">Book us</a><a href="#gallery">Our drinks</a>
+      <a href="#menu">Menu</a><a href="#events">Book us</a>
       <span>© <span id="year"></span> Bertiga</span>
     </div>
   </div>
@@ -404,17 +362,6 @@ footer a:hover{color:#fff}
 const WHATSAPP_NUMBER = "601162154929";   // country code + number, digits only
 const CITY = "Bandar Baru Bangi, Selangor";              // shown under the logo
 
-// Gallery. Add a photo with photo: "images/iced-latte.jpg"
-// cat must be: coffee | sparkling | matcha | choc
-const DRINKS = [
-  { name: "Iced Latte",       cat: "coffee",    photo: "images/Iced Latte.png" },
-  { name: "Strawberry Soda",  cat: "sparkling", photo: "images/Strawberry soda.png" },
-  { name: "Matcha Latte",     cat: "matcha",    photo: "images/Matcha Latte.png", zoom: 1.4 },
-  { name: "Iced Chocolate",   cat: "choc",      photo: "images/Iced Chocolate.png" }
-  // Add more like this:
-  // { name: "Americano", cat: "coffee", photo: "images/Americano.png" },
-  // If a photo looks too small, add  zoom: 1.3  to make it bigger
-];
 /* ============================================= */
 
 const num = WHATSAPP_NUMBER.replace(/\D/g, "");
@@ -460,41 +407,6 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-/* Gallery + breadcrumbs */
-const CATS = [
-  { id: "all", label: "All" }, { id: "coffee", label: "Coffee" }, { id: "sparkling", label: "Sparkling" },
-  { id: "matcha", label: "Matcha" }, { id: "choc", label: "Chocolate" }
-];
-const LABEL = { coffee: "Coffee", sparkling: "Sparkling", matcha: "Matcha", choc: "Chocolate" };
-const TILE = { coffee: "#E6D6C4", sparkling: "#D5E6EA", matcha: "#D9E5C6", choc: "#E0CCC3" };
-const filtersEl = document.getElementById("filters"), grid = document.getElementById("grid"), crumb = document.getElementById("crumbCurrent");
-
-function cup(d){
-  return `<svg role="img" aria-label="${d.name}" width="130" height="162" viewBox="0 0 120 150">
-    <path d="M22 20h76l-9 118a6 6 0 0 1-6 6H37a6 6 0 0 1-6-6L22 20z" fill="rgba(255,255,255,.4)" stroke="rgba(255,255,255,.9)" stroke-width="2"/>
-    <path d="M27 52h66l-6.5 85a5 5 0 0 1-5 5H38.5a5 5 0 0 1-5-5L27 52z" fill="${d.liquid}"/>
-    <path d="M27 52h66l-1.2 14H28.2z" fill="${d.top}"/></svg>
-    <span class="tag">Replace with your photo</span>`;
-}
-function render(cur){
-  filtersEl.innerHTML = "";
-  CATS.forEach(c => {
-    const b = document.createElement("button");
-    b.type = "button"; b.textContent = c.label;
-    b.setAttribute("aria-pressed", c.id === cur);
-    b.onclick = () => render(c.id);
-    filtersEl.appendChild(b);
-  });
-  crumb.textContent = CATS.find(c => c.id === cur).label;
-  grid.innerHTML = DRINKS.filter(d => cur === "all" || d.cat === cur).map((d, i) => `
-    <figure style="animation-delay:${i * 60}ms">
-      <div class="shot" style="background:${TILE[d.cat]}">
-        ${d.photo ? `<img src="${encodeURI(d.photo)}" alt="${d.name}" loading="lazy"${d.zoom ? ` style="scale:${d.zoom};transform-origin:50% 80%"` : ""}>` : cup(d)}
-      </div>
-      <figcaption><b>${d.name}</b><span>${LABEL[d.cat]}</span></figcaption>
-    </figure>`).join("");
-}
-render("all");
 </script>
 </body>
 </html>
